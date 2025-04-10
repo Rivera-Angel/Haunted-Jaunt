@@ -5,7 +5,7 @@
 [20] Add at least one new sound effect with trigger(s).  
 
 ### Angel Rivera:  
-**Linear interpolation** was implemented to transition between colors of the directional light. The following line of code uses the `Color.Lerp` function to interpolate between two colors, cycling around the colors of the rainbow. It follows the equation:  
+__Linear interpolation__ was implemented to transition between colors of the directional light. The following line of code uses the `Color.Lerp` function to interpolate between two colors, cycling around the colors of the rainbow. It follows the equation:  
 
 **Interpolated Value=A+(B−A)×t**  
 
