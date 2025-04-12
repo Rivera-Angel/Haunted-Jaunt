@@ -801,7 +801,6 @@ GameObject:
   - component: {fileID: 411650687}
   - component: {fileID: 411650690}
   - component: {fileID: 411650689}
-  - component: {fileID: 411650688}
   m_Layer: 0
   m_Name: Fart
   m_TagString: Untagged
@@ -824,19 +823,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2008973354732098957}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!114 &411650688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 411650686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ace4a3f8fa8f4b48bfed71d41995199, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fartEffect: {fileID: 411650690}
 --- !u!199 &411650689
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -997,7 +983,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1485,7 +1471,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 3
+    maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -6183,6 +6169,37 @@ Transform:
   - {fileID: 1730677063}
   - {fileID: 1621696774}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1086527577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1086527578}
+  m_Layer: 0
+  m_Name: FartOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1086527578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086527577}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.3, z: -0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2008973354732098957}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1407275730
 PrefabInstance:
@@ -12137,11 +12154,19 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 411650687}
+    - targetCorrespondingSourceObject: {fileID: 2008973354732098957, guid: e58a8494f35e17f45ba5bbffdfb92517,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1086527578}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6077229646317852079, guid: e58a8494f35e17f45ba5bbffdfb92517,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6077229646317852086}
+    - targetCorrespondingSourceObject: {fileID: 6077229646317852079, guid: e58a8494f35e17f45ba5bbffdfb92517,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6077229646317852093}
   m_SourcePrefab: {fileID: 100100000, guid: e58a8494f35e17f45ba5bbffdfb92517, type: 3}
 --- !u!195 &5075534488604402036 stripped
 NavMeshAgent:
@@ -12354,6 +12379,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff145f634886db049b3856b547fad5ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6077229646317852093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6077229646317852079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ace4a3f8fa8f4b48bfed71d41995199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fartEffect: {fileID: 411650690}
+  fartOrigin: {fileID: 1086527578}
 --- !u!1001 &6136966654407605910
 PrefabInstance:
   m_ObjectHideFlags: 0
