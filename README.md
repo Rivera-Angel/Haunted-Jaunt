@@ -11,5 +11,5 @@ __Linear interpolation__ was implemented to transition the colors of the directi
 ### Particle + Sound Effects  
 Press space to trigger the fart particle and sound effect! Done by applying a custom particle system to the playergame object and adding sound by....  
 
-__Levi__: Dot product, sound effect  
-__Angel__: Linear Interpolation, particle effect
+__Levi Salgado__: Dot product, sound effect  
+__Angel Rivera__: Linear Interpolation, particle effect
