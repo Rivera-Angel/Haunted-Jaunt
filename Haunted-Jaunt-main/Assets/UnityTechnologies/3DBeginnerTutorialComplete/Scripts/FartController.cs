@@ -5,6 +5,7 @@ public class FartController : MonoBehaviour
 {
     public ParticleSystem fartEffect;
     public Transform fartOrigin;
+    public AudioSource fartNoise;
 
     void Update()
     {
@@ -17,6 +18,7 @@ public class FartController : MonoBehaviour
                 fartEffect.transform.rotation = fartOrigin.rotation;
 
                 fartEffect.Play();
+                fartNoise.Play();
             }
             else
             {
