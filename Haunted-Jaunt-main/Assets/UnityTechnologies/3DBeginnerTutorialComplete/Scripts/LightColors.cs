@@ -7,8 +7,8 @@ public class LightColors : MonoBehaviour
 
     private Color[] rainbowColors = new Color[]
     {
-        Color.red,
-        Color.yellow,
+        //Color.red,
+        //Color.yellow,
         Color.green,
         Color.cyan,
         Color.blue,

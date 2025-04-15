@@ -8,35 +8,34 @@ public class EnemyDetection : MonoBehaviour
     [Header("Dimming Settings")]
     public Image dimmingImage;
     public float maxDimmingAlpha = 0.4f;
-    public float dimmingSpeed = 10f;
+    public float dimmingSpeed = 8f;
     private float currentDimmingAlpha = 0f;
 
     [Header("Enemy Detection")]
-    public float detectionRadius = 10f;
+    public float detectionRadius = 6f;
     public string enemyTag = "Enemy";
     public float visionCone = 30f;
     //public Transform player; // Point from which to cast the ray (e.g., player)
-    public LayerMask obstructionLayers; // Layers that can block line of sight
+    public LayerMask layerMaskThing; // Layers that can block line of sight
 
     private List<Transform> nearbyEnemies = new List<Transform>();
 
-    private void Start()
-    {
-        // converts degrees to rads for later calc on visionCone
-        visionCone = Mathf.Cos(Mathf.Deg2Rad * (visionCone / 2.0f));
-    }
-
     void Update()
     {
-        // Create list of nearby enemies if present. If not, exit
+        // Create list of nearby enemies if present
         if (FindNearbyEnemies())
         {
+            // Find the closest visible enemy from the player given the list
             Transform enemy = closestVisibleEnemy();
 
             if (enemy != null)
             {
                 float dimMod = FindDimModifier(enemy);
                 currentDimmingAlpha = Mathf.Lerp(currentDimmingAlpha, dimMod, Time.deltaTime * dimmingSpeed);
+            }
+            else
+            {
+                currentDimmingAlpha = Mathf.Lerp(currentDimmingAlpha, 0f, Time.deltaTime * dimmingSpeed);
             }
         }
         else
@@ -94,7 +93,7 @@ public class EnemyDetection : MonoBehaviour
         Vector3 direction = enemy.position - transform.position;
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, direction.normalized, out hit, detectionRadius, ~obstructionLayers))
+        if (Physics.Raycast(transform.position, direction.normalized, out hit, detectionRadius, layerMaskThing))
         {
             if (hit.collider != null && hit.collider.CompareTag(enemyTag))
             {
@@ -114,7 +113,7 @@ public class EnemyDetection : MonoBehaviour
 
 
         // calc distance to enemy and how much to modify dimming
-        float distance = Vector3.Magnitude(transform.position - enemy.position);
+        float distance = Vector3.Magnitude(directionToPlayer);
         // modify dimming relative to closeness
         // EX if detRad is 6, and 6 away, 6-6+1=1. 1/6 times the dimming makes it smaller
         // closing the gap increases the numerator, which makes the dimming larger
@@ -135,23 +134,32 @@ public class EnemyDetection : MonoBehaviour
     // check if facing
     bool IsFacing(Vector3 direction, Vector3 forward)
     {
-        // product that says if player is facing same direction towards enemy
-        float dotProduct = Vector3.Dot(forward, direction);
-        float angle = dotProduct / (Vector3.Magnitude(forward) * Vector3.Magnitude(direction));
+        // product that says if enemy is facing player
+        Vector3 normDir = direction.normalized;
+        float dotProduct = Vector3.Dot(forward, normDir);
 
-        if (angle > visionCone)
+        // Convert vision cone degrees to radians for Mathf.Cos
+        float halfVisionConeRadians = visionCone * 0.5f * Mathf.Deg2Rad;
+        float cosHalfVisionCone = Mathf.Cos(halfVisionConeRadians);
+
+        if (dotProduct >= cosHalfVisionCone)
         {
             return true;
         }
-        else return false;
+        else
+        {
+            return false;
+        }
     }
 
 
 
     // Optional: Visualize the detection radius in the editor
+    
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
+    
 }
